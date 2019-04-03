@@ -1,37 +1,51 @@
 ## Melit Guidelines
 
-You can use the [editor on GitHub](https://github.com/devmelit/guidelines/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## JIRA:
+Recibimos una respuesta de un cliente, comentamos el ticket de esta forma:
+EMAIL  CLIENTE: [[ASUNTO EMAIL]]
+[[MENSAJE]] 
+[[ADJUNTOS]]
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+Usar opción de “quotes” para diferenciar lo que copiamos del cliente de lo que escribimos nosotros.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Crear ramas con el número de ticket (ver apartado GIT)
 
-```markdown
-Syntax highlighted code block
+Cuando se comenta y se cambia el estado de un ticket, comentar el código #done, #test-env, etc…
+Añadir a los commit en la parte de #comment “#code“, para diferenciar un comentario escrito de los comentarios de los commit.
 
-# Header 1
-## Header 2
-### Header 3
+## GIT:
+Nombre de las branch:
+a)	Ticket JIRA: branch original “/” ticket jira “-“ breve descripción. 
+Ej: develop/MESP-15-crear-pdf-oferta
 
-- Bulleted
-- List
+b)	Usaremos un esquema GIT Flow adaptado, es decir, si hay un fallo en la branch master se solucionará en la branch hotfix/MESP-74-fix-null-documentos, al terminar se solicita pull request a master y develop
 
-1. Numbered
-2. List
+Usar los Smart commits para realizar acciones en los tickets de JIRA. Info: https://confluence.atlassian.com/fisheye/using-smart-commits-960155400.html
+Syntax
+<ignored text> ISSUE_KEY <ignored text> #comment <comment_string>
+Example
+JRA-34 #comment corrected indent issue
 
-**Bold** and _Italic_ and `Code` text
+Registrar el tiempo en cada commit
+Syntax
+<ignored text> ISSUE_KEY <ignored text> #time <value>w <value>d <value>h <value>m <comment_string>
+Example
+JRA-34 #time 1w 2d 4h 30m Total work logged
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## CODIGO:
 
-### Jekyll Themes
+Evitar java.lang.NullPointerException en booleanos.
+ 
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/devmelit/guidelines/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## BASE DE DATOS:
+No se eliminan o renombran columnas o tablas con liquibase.
+Evitar incluir el schema en las queries.
+Evitar SQL: AFTER `last_modify`
+Añadir a los changelog.sql de los proyectos el comentario con la fecha y el ticket. Ej.:
+#2019-03-15 MITA-101
+ALTER TABLE `auditoria` 
+ADD COLUMN `nivel_gross_margin` INT(11) NULL;
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Cuando se generan nuevas columnas a tablas que ya contienen datos, siempre intentar crear una query SQL para rellenarla. Excepto si la nueva columna no lo requiere. 
