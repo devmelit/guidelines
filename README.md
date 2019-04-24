@@ -41,8 +41,10 @@ Evitar java.lang.NullPointerException en booleanos.
 
 ## BASE DE DATOS:
 No se eliminan o renombran columnas o tablas con liquibase.
+
 Evitar incluir el schema en las queries.
 Evitar SQL: AFTER `last_modify`
+
 Añadir a los changelog.sql de los proyectos el comentario con la fecha y el ticket. Ej.:
 #2019-03-15 MITA-101
 ALTER TABLE `mi_tabla` 
