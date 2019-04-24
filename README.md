@@ -37,7 +37,7 @@ JRA-34 #time 1w 2d 4h 30m Total work logged
 ## CODIGO:
 
 Evitar java.lang.NullPointerException en booleanos.
- 
+
 
 ## BASE DE DATOS:
 No se eliminan o renombran columnas o tablas con liquibase.
@@ -45,7 +45,7 @@ Evitar incluir el schema en las queries.
 Evitar SQL: AFTER `last_modify`
 Añadir a los changelog.sql de los proyectos el comentario con la fecha y el ticket. Ej.:
 #2019-03-15 MITA-101
-ALTER TABLE `auditoria` 
-ADD COLUMN `nivel_gross_margin` INT(11) NULL;
+ALTER TABLE `mi_tabla` 
+ADD COLUMN `mi_column` INT(11) NULL;
 
 Cuando se generan nuevas columnas a tablas que ya contienen datos, siempre intentar crear una query SQL para rellenarla. Excepto si la nueva columna no lo requiere. 
